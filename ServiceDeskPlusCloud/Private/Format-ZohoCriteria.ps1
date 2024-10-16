@@ -49,8 +49,8 @@ function Format-ZohoCriteria {
 
         # Logical operator to append criteria to existing search with
         [ValidateSet(
-            'AND',
-            'OR'
+            'and',
+            'or'
         )]
         $Operator,
 
@@ -70,7 +70,8 @@ function Format-ZohoCriteria {
 
     if ($PSBoundParameters.ContainsKey('Operator')) {
         Write-Verbose "Adding [$Operator] operator"
-        $Criteria.logical_operator = $Operator
+        # API is case sensitive
+        $Criteria.logical_operator = $Operator.ToLower()
     }
 
     if ($PSBoundParameters.ContainsKey('Children')) {

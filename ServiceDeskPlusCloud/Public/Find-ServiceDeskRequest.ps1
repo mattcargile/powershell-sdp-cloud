@@ -31,6 +31,7 @@ function Find-ServiceDeskRequest {
         [ValidateNotNull()]
         $Technician,
 
+<<<<<<< Updated upstream
         # Maximum number of requests to return. Value passed to the row_count property of the
         # list_info object passed to the API
         $Limit = 100,
@@ -41,6 +42,19 @@ function Find-ServiceDeskRequest {
 
         # TODO: Separate these into different parameter sets, **defaulting to Page for now**
         $Page = 1
+=======
+        [ValidateNotNull()]
+        $TechnicianLogicalOperator,
+
+        [ValidateNotNull()]
+        $Group,
+
+        [ValidateNotNull()]
+        $GroupLogicalOperator,
+
+        [string[]]
+        $Fields
+>>>>>>> Stashed changes
     )
 
     $ApiParams = @{

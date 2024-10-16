@@ -4,6 +4,6 @@ foreach ($File in (Get-ChildItem "$PSScriptRoot\public", "$PSScriptRoot\private"
 }
 
 # Export all public functions
-foreach ($File in (Get-ChildItem "$PSScriptRoot\public" -Recurse -Filter '*.ps1')) {
-    Export-ModuleMember $File.BaseName
-}
+# foreach ($File in (Get-ChildItem "$PSScriptRoot\public" -Recurse -Filter '*.ps1')) {
+#     Export-ModuleMember $File.BaseName
+# }

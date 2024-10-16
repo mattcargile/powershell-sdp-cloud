@@ -9,6 +9,9 @@ function Format-ZohoSearch {
         [string]
         $Technician,
 
+        [string]
+        $TechnicianLogicalOperator,
+
         [Alias('CreatedBy')]
         [string]
         $Creator,
@@ -27,6 +30,10 @@ function Format-ZohoSearch {
 
         [string]
         $Group,
+
+        # And/Or Logical Operator
+        [string]
+        $GroupLogicalOperator,
 
         [string]
         $Department,
@@ -60,8 +67,12 @@ function Format-ZohoSearch {
             Values = $Technician
             Field = Resolve-UserField $Technician -Field 'technician'
         }
-
-        $Criteria += Format-ZohoCriteria @Shared @TechParams
+        if ($TechnicianLogicalOperator) {
+            $Criteria += Format-ZohoCriteria @Shared @TechParams -Operator $TechnicianLogicalOperator             
+        }
+        else {
+            $Criteria += Format-ZohoCriteria @Shared @TechParams            
+        }
     }
 
     if ($PSBoundParameters.ContainsKey('Creator')) {
@@ -95,7 +106,12 @@ function Format-ZohoSearch {
     }
 
     if ($PSBoundParameters.ContainsKey('Group')) {
-        $Criteria += Format-ZohoCriteria @Shared -Field 'group.name' -Values $Group
+        if ($GroupLogicalOperator) {
+            $Criteria += Format-ZohoCriteria @Shared -Field 'group.name' -Values $Group -Operator $GroupLogicalOperator        
+        }
+        else {            
+            $Criteria += Format-ZohoCriteria @Shared -Field 'group.name' -Values $Group
+        }
     }
 
     if ($PSBoundParameters.ContainsKey('Department')) {
